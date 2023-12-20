@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuii.mapper.SysChatMessageMapper">
+  <resultMap id="BaseResultMap" type="com.cuii.entity.SysChatMessage">
+    <!--@mbg.generated-->
+    <!--@Table sys_chat_message-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="send_id" jdbcType="INTEGER" property="sendId" />
+    <result column="to_id" jdbcType="INTEGER" property="toId" />
+    <result column="message_type" jdbcType="INTEGER" property="messageType" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, send_id, to_id, message_type, content, `source`, create_time, `status`
+  </sql>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_chat_message
+    (send_id, to_id, message_type, content, `source`, create_time, `status`)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.sendId,jdbcType=INTEGER}, #{item.toId,jdbcType=INTEGER}, #{item.messageType,jdbcType=INTEGER}, 
+        #{item.content,jdbcType=VARCHAR}, #{item.source,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.status,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+</mapper>
